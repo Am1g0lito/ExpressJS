@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <!-- Viewport essencial para responsividade -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap 5 CSS (via CDN) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <!-- Usando a variável 'titulo' passada pelo Express -->
+    <title>{{titulo}}</title>
+
+    <style>
+        /* Estilos personalizados podem ser adicionados aqui, se necessário,
+           mas vamos priorizar as classes do Bootstrap */
+        body {
+            background-color: #f8f9fa; /* Um cinza claro de fundo do Bootstrap */
+        }
+        .card-title strong { /* Estilo para o nome do item dentro do card */
+             color: #0d6efd; /* Azul padrão do Bootstrap */
+        }
+    </style>
+</head>
+<body>
+    <!-- Container principal do Bootstrap com margem no topo (mt-4) -->
+    <div class="container mt-4">
+
+        <!-- Título da página com estilo de display e margem inferior (mb-4) -->
+        <h1 class="display-5 mb-4">{{titulo}}</h1>
+
+        <!-- Verificando se o array 'itensParaView' existe e tem elementos -->
+        {{#if itensParaView.length}}
+            <div class="row">
+                <!-- Iterando sobre o array 'itensParaView' -->
+                {{#each itensParaView}}
+                    <div class="col-md-6 col-lg-4 mb-3">
+                       <div class="card h-100">
+                           <div class="card-body d-flex flex-column">
+                               <h5 class="card-title">
+                                   <strong>{{this.nome}}</strong>
+                                   <small class="text-muted fw-normal"> (ID: {{this.id}})</small>
+                               </h5>
+                               <p class="card-text flex-grow-1">{{this.descricao}}</p>
+                               <a href="#" class="btn btn-sm btn-outline-primary mt-auto">Ver Detalhes</a>
+                           </div>
+                       </div>
+                    </div>
+                {{/each}}
+            </div>
+        {{else}}
+            <!-- Mensagem caso o array esteja vazio -->
+            <div class="alert alert-warning" role="alert">
+                Nenhum item para exibir no momento.
+            </div>
+        {{/if}}
+
+        <hr class="my-4">
+
+        <!-- Link para voltar, estilizado como botão Bootstrap -->
+        <a href="/" class="btn btn-secondary">Voltar para a página inicial</a>
+
+    </div>
+
+    <!-- Bootstrap 5 Bundle JS (inclui Popper) (via CDN) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
